@@ -1,4 +1,4 @@
-module Spec
+module RSpec
   module Matchers
     class Within #:nodoc:
       def initialize(receiver=nil, &block)
@@ -18,7 +18,7 @@ module Spec
     end
 
     def be_within(receiver=nil)
-      Spec::Matchers::Within.new(receiver)
+      RSpec::Matchers::Within.new(receiver)
     end
   end
 end
