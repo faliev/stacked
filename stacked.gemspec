@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   
   s.add_runtime_dependency 'activesupport', '~> 3.0.3'
   s.add_runtime_dependency 'httparty', '~> 0.7.3'
+  s.add_runtime_dependency 'i18n', '~> 0.5.0' # Because AS "depends" on it for string core ext
 
   s.required_rubygems_version = '>= 1.3.6'
   s.platform                  = Gem::Platform::RUBY
