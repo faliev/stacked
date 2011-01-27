@@ -11,5 +11,9 @@ Dir["spec/support/**/*.rb"].each { |f| require f }
 # FakeWeb.allow_net_connect = false
 
 RSpec.configure do |config|
-
+  config.before(:each) do
+    Stacked::Client.configure do |c|
+      c.api_key = "FAKE"
+    end
+  end
 end
