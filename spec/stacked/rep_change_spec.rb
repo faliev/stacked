@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe Stacked::Repchange do
+describe Stacked::RepChange do
   # Being very particular about what Reputation we mean...
   subject { Stacked::User.find(22656).rep_changes(:fromdate => 1270132345, :todate => 1270132348).first }
 
