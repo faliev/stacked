@@ -1,8 +1,7 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'stacked'
-require 'spec'
-require 'spec/autorun'
+require 'rspec'
 require 'fakeweb'
 
 Dir["spec/support/**/*.rb"].each { |f| require f }
@@ -11,6 +10,6 @@ Dir["spec/support/**/*.rb"].each { |f| require f }
 # At least, until it becomes stable.
 # FakeWeb.allow_net_connect = false
 
-Spec::Runner.configure do |config|
+RSpec.configure do |config|
 
 end
