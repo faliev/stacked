@@ -5,11 +5,8 @@ rescue LoadError
   Bundler.setup!
 end
 
-require 'active_support'
-begin
-  require 'active_support/all'
-rescue LoadError
-end
+require 'active_support/dependencies/autoload'
+require 'active_support/core_ext/module/delegation'
 
 # The Stacked module.
 module Stacked
@@ -25,12 +22,7 @@ module Stacked
   # Instead of:
   #
   # autoload :Base, 'stacked/base'
-  class << self
-    # Autoload classes
-    def autoload(klass)
-      super(klass, "stacked/#{klass.to_s.underscore}")
-    end
-  end
+  extend ActiveSupport::Autoload
   
   autoload :Client
   autoload :Answer
