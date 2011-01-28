@@ -96,19 +96,12 @@ module Stacked
         self.to_s.demodulize.downcase.pluralize
       end
     end
-
-    
-    # Return a metaclass.
-    def metaclass
-      class << self
-        self
-      end
-    end
     
     # Builds attr_accessor for each attribute found in the reponse.
     def define_attributes(hash={})
       hash.each_pair do |key, value|
-        metaclass.send(:attr_accessor, key) unless metaclass.respond_to?("#{key}=".to_sym)
+        self.class.send(:attr_writer, key) unless respond_to?("#{key}=".to_sym)
+        self.class.send(:attr_reader, key) unless respond_to?("#{key}".to_sym)
         send "#{key}=".to_sym, value
       end
     end
