@@ -29,6 +29,7 @@ module Stacked
   autoload :Badge
   autoload :Comment
   autoload :PostTimeline
+  autoload :Parser
   autoload :Question
   autoload :RepChange
   autoload :Tag
