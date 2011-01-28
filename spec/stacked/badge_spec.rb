@@ -2,8 +2,16 @@ require 'spec_helper'
 
 describe Stacked::Badge do
   subject { Stacked::Badge }
+  
+  before :all do
+    fake "badges"
+    fake "badges/name"
+    fake "badges/tags"
+  end
+  
   it "finds all badges" do
-    subject.all.first.should be_is_a(Stacked::Badge)
+    badge = subject.all.first
+    badge.should be_is_a(Stacked::Badge)
   end
 
   it "finds all badges ordered by name" do

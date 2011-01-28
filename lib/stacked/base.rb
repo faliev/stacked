@@ -117,7 +117,7 @@ module Stacked
 
     # Creates a new object of the given class based on the attributes passed in.
     def initialize(attributes={})
-      #self.define_attributes(attributes)
+      define_attributes(attributes)
       
       attributes.each do |k, v|
         attr_sym = "#{k}=".to_sym
