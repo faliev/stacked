@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SortedByMatcher::Sortedby do
+describe RSpec::Matchers::SortedBy do
   before do
     @questions = []
     @questions << Stacked::Question.new(:last_edit_date => Time.now.to_i)
