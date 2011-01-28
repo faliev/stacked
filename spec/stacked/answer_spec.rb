@@ -8,7 +8,13 @@ describe Stacked::Answer do
   end
 
   context "instance methods" do
+    before(:all) do
+      fake "answers/1237127", :query => { :body => true }
+      fake "questions/1236996"
+    end
+
     subject { Stacked::Answer.find(1237127, :body => true) }
+
     it "finds the user for an answer" do
       subject.owner.should be_is_a(Stacked::User)
       subject.owner.display_name.should eql("Daniel Vandersluis")
