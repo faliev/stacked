@@ -1,4 +1,5 @@
 require 'httparty'
+require 'zlib'
 
 module Stacked
   # Stacked::Base class.
@@ -45,9 +46,10 @@ module Stacked
         parse(request(p, options)[resource])
       end
 
-      # Raw Hash of request.
+      # Makes request to StackExchange server and decodes it from gzip.
       def request(p = path, options = {})
-        get(p, :query => { :key => key }.merge!(options))
+        result = StringIO.new(get(p, :query => { :key => key }.merge!(options)).body)
+        JSON.parse(Zlib::GzipReader.new(result).read)
       end
 
       # The path to the singular resource.
