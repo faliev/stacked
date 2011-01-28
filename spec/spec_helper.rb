@@ -1,8 +1,6 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-require 'stacked'
 require 'rspec'
-require 'fakeweb'
+require 'stacked'
+require 'webmock'
 
 Dir["spec/support/**/*.rb"].each { |f| require f }
 
@@ -10,10 +8,10 @@ Dir["spec/support/**/*.rb"].each { |f| require f }
 # At least, until it becomes stable.
 # FakeWeb.allow_net_connect = false
 
-RSpec.configure do |config|
-  config.before(:each) do
-    Stacked::Client.configure do |c|
-      c.api_key = "FAKE"
+RSpec.configure do |c|
+  c.before(:all) do
+    Stacked::Client.configure do |config|
+      config.api_key = "FAKE"
     end
   end
 end

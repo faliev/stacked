@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require 'spec_helper'
 
-describe Spec::Matchers::Sortedby do
+describe SortedByMatcher::Sortedby do
   before do
     @questions = []
     @questions << Stacked::Question.new(:last_edit_date => Time.now.to_i)

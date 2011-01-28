@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require 'spec_helper'
 
 describe Stacked::Badge do
   subject { Stacked::Badge }
@@ -11,7 +11,7 @@ describe Stacked::Badge do
   end
 
   it "finds all badges based on tags" do
-    subject.tags.first.name.should eql(".net")
+    subject.tags.first.name.should eql(".htaccess")
   end
 
 end

@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require 'spec_helper'
 
 describe Stacked::Comment do
   subject { Stacked::Comment }
@@ -12,25 +12,21 @@ describe Stacked::Comment do
     it "finds a single comment" do
       comment = Stacked::Comment.find(2561833)
       comment.should be_is_a(Stacked::Comment)
-      comment.owner_user_id.should eql(22656)
+      comment.owner.should be_is_a(Stacked::User)
+      comment.owner.user_id.should eql(22656)
     end
   end
 
   context "instance methods" do
     subject { Stacked::Comment.find(2561833) }
 
-    aliases(:comment_id => :id,
-            :created_at => :creation_date,
-            :owner      => :user,
-            :edits      => :edit_count)
-
     it "finds the related post for this comment" do
       subject.post.should be_is_a(Stacked::Answer)
     end
 
     it "finds who the comment was directed at, or nobody if nobody" do
-      Stacked::Comment.find(2561833).reply_to.should be_is_a(Stacked::User)
-      Stacked::Comment.find(1063043).reply_to.should be_nil
+      Stacked::Comment.find(2561833).reply_to_user.should be_is_a(Stacked::User)
+      Stacked::Comment.find(1063043).reply_to_user.should be_nil
     end
 
     it "finds the user who wrote the comment" do

@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require 'spec_helper'
 
 describe Stacked::Answer do
   context "class methods" do
@@ -10,18 +10,13 @@ describe Stacked::Answer do
   context "instance methods" do
     subject { Stacked::Answer.find(1237127, :body => true) }
     it "finds the user for an answer" do
-      subject.user.display_name.should eql("Daniel Vandersluis")
+      subject.owner.should be_is_a(Stacked::User)
+      subject.owner.display_name.should eql("Daniel Vandersluis")
     end
 
     it "finds the question for an answer" do
       subject.question.should be_is_a(Stacked::Question)
     end
-
-    aliases(:views      => :view_count,
-            :up_votes   => :up_vote_count,
-            :answer_id  => :id,
-            :created_at => :creation_date,
-            :updated_at => :last_edit_date)
 
     it "has a body" do
       subject.body.should_not be_blank
