@@ -1,23 +1,6 @@
 module Stacked
   # Stacked::Answer class.
   class Answer < Base
-    attr_accessor :accepted,
-                  :answer_comments_url,
-                  :answer_id,
-                  :body,
-                  :comments,
-                  :community_owned,
-                  :creation_date,
-                  :down_vote_count,
-                  :last_activity_date,
-                  :last_edit_date,
-                  :locked_date,
-                  :owner,
-                  :question_id,
-                  :score,
-                  :title,
-                  :up_vote_count,
-                  :view_count
     
     class << self
       def all(*args)
