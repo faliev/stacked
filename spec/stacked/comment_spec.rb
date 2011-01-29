@@ -2,6 +2,12 @@ require 'spec_helper'
 
 describe Stacked::Comment do
   subject { Stacked::Comment }
+  
+  before(:all) do
+    fake "comments/2561833"
+    fake "comments/1063043"
+    fake "answers/2558700" # referenced by subject.post
+  end
 
   context "class methods" do
 
