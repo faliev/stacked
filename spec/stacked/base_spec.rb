@@ -5,14 +5,21 @@ describe Stacked::Base do
     # We cannot use Stacked::Base here obviously because SO does not have Bases!
     # So we use User instead.
     subject { Stacked::User }
+    
+    before(:all) do
+      fake "users"
+      fake "users/index-page2", :url_path => 'users', :query => { :page => 2 }
+      fake "users/index-pagesize1", :url_path => 'users', :query => { :pagesize => 1 }
+      fake "stats"
+    end
 
     it "retrieves a list of a resource" do
-      pending("Crack::ParseError: Invalid JSON string")
+      #pending("Crack::ParseError: Invalid JSON string")
       subject.all.all? { |u| u.is_a?(subject) }.should be_true
     end
 
     it "paginates through the resource" do
-      pending("Crack::ParseError: Invalid JSON string")
+      #pending("Crack::ParseError: Invalid JSON string")
       subject.all.first.should_not eql(subject.all(:page => 2).first)
     end
 
