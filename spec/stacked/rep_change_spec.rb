@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe Stacked::RepChange do
+  before(:all) do
+    fake "users/22656"
+    fake "users/22656-reputation", :url_path => 'users/22656/reputation', :query => { :fromdate => 1270132345, :todate => 1270132348 }
+    fake "answers/2272830" # referenced by subject.post
+  end
+  
   # Being very particular about what Reputation we mean...
   subject { Stacked::User.find(22656).rep_changes(:fromdate => 1270132345, :todate => 1270132348).first }
 
@@ -13,6 +19,4 @@ describe Stacked::RepChange do
     subject.stub!(:negative_rep => 15)
     subject.score.should eql(0)
   end
-
-
 end
