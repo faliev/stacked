@@ -1,58 +1,88 @@
 require 'spec_helper'
 
 describe Stacked::User do
+  
   subject { Stacked::User }
+  
+  before(:all) do
+    fake "users"
+    fake "users/newest",  :url_path => 'users', :query => { :sort => 'creation' }
+    fake "users/oldest",  :url_path => 'users', :query => { :sort => 'creation', :order => 'asc' }
+    fake "users/name",    :url_path => 'users', :query => { :sort => 'name', :filter => 'ryan' }
+    fake "users/filter",  :url_path => 'users', :query => { :filter => 'Ryan Bigg' }
+  end
+  
   context "class methods" do
 
     it "gathers the newest user" do
-      subject.all(:sort => 'creation', :pagesize => 1).first.creation_date.should be_within(1.day)
+      subject.all(:sort => 'creation').first.creation_date.should be_within(1.day)
     end
 
     it "gathers the oldest user" do
-      subject.all(:sort => 'creation', :order => 'asc', :pagesize => 1).first.display_name.should eql("Community")
+      subject.all(:sort => 'creation', :order => 'asc').first.display_name.should eql("Community")
     end
 
     it "gathers the users by name" do
-      subject.all(:sort => 'name', :filter => 'ryan', :pagesize => 1).first.display_name.should eql("ytbryan")
+      subject.all(:sort => 'name', :filter => 'ryan').first.display_name.should eql("ytbryan")
     end
 
     it "gathers users by reputation" do
-      subject.all(:pagesize => 1).first.display_name.should eql("Jon Skeet")
+      subject.all.first.display_name.should eql("Jon Skeet")
     end
 
     it "gathers all the Ryan Bigg users" do
-      # Limited to 1 result in case other people want to steal my name.
-      subject.all(:filter => "Ryan Bigg", :pagesize => 1).first.display_name.should eql("Ryan Bigg")
+      subject.all(:filter => "Ryan Bigg").first.display_name.should eql("Ryan Bigg")
     end
   end
 
   context "instance methods" do
+    before(:all) do
+      fake "users/22656"
+    end
+    
     subject { Stacked::User.find(22656) }
 
     context "answers" do
+      before(:all) do
+        fake "users/22656-answers", :url_path => 'users/22656/answers'
+        fake "users/22656-answers-by-activity", :url_path => 'users/22656/answers', :query => { :sort => 'activity' }
+        fake "users/22656-answers-by-creation", :url_path => 'users/22656/answers', :query => { :sort => 'creation' }
+        fake "users/22656-answers-by-votes", :url_path => 'users/22656/answers', :query => { :sort => 'votes' }
+        fake "users/22656-answers-by-views", :url_path => 'users/22656/answers', :query => { :sort => 'views' }
+      end
+      
       it "finds the user's answers" do
         subject.answers.should_not be_empty
         subject.answers.first.should be_is_a(Stacked::Answer)
       end
 
       it "finds the user's most recent answers" do
-        subject.answers(:sort => 'activity', :pagesize => 2).should be_sorted_by(:last_activity_date, :desc)
+        subject.answers(:sort => 'activity').should be_sorted_by(:last_activity_date, :desc)
       end
       
       it "finds the user's newest answers" do
-        subject.answers(:sort => 'creation', :pagesize => 2).should be_sorted_by(:creation_date, :desc)
+        subject.answers(:sort => 'creation').should be_sorted_by(:creation_date, :desc)
       end
       
       it "finds the user's most popular answers" do
-        subject.answers(:sort => 'votes', :pagesize => 2).should be_sorted_by(:score, :desc)
+        subject.answers(:sort => 'votes').should be_sorted_by(:score, :desc)
       end
       
       it "finds the user's most viewed answers" do
-        subject.answers(:sort => 'views', :pagesize => 2).should be_sorted_by(:view_count, :desc)
+        subject.answers(:sort => 'views').should be_sorted_by(:view_count, :desc)
       end
     end
 
     context "comments" do
+      before(:all) do
+        fake "users/22656-comments", :url_path => 'users/22656/comments'
+        fake "users/22656-comments-by-creation", :url_path => 'users/22656/comments', :query => { :sort => 'creation' }
+        fake "users/22656-comments-by-votes", :url_path => 'users/22656/comments', :query => { :sort => 'votes' }
+        
+        fake "users/22656-comments-mentioning-by-creation", :url_path => 'users/22656/comments/133566', :query => { :sort => 'creation', :fromdate => 1270107600, :todate => 1270107700 }
+        fake "users/22656-comments-mentioning-by-votes",    :url_path => 'users/22656/comments/133566', :query => { :sort => 'votes', :fromdate => 1270107600, :todate => 1270107700 }
+      end
+      
       it "finds some of the user's comments" do
         pending("Seems to break on Jon Skeet for some reason. See http://api.stackoverflow.com/1.0/users/22656/comments")
         subject.comments.should_not be_empty
@@ -68,12 +98,6 @@ describe Stacked::User do
         pending("Seems to break on Jon Skeet for some reason. See http://api.stackoverflow.com/1.0/users/22656/comments")
         subject.comments(:sort => 'votes').should be_sorted_by(:score, :desc)
       end
-
-      it "finds all comments directed at a user" do
-        # The "magic" numbers for the date range are "around" comment #2561833.
-        # This method is a bit funny, why would you want this time-boxed?
-        subject.comments_mentioning_user(133566, :fromdate => 1270107600, :todate => 1270107700).first.should be_is_a(Stacked::Comment)
-      end
       
       it "finds all comments directed at a user recently" do
         subject.comments_mentioning_user(133566, :sort => 'creation', :fromdate => 1270107600, :todate => 1270107700).first.should be_is_a(Stacked::Comment)
@@ -85,36 +109,46 @@ describe Stacked::User do
     end
 
     context "favorites" do
+      before(:all) do
+        fake "users/22656-favorites", :url_path => 'users/22656/favorites'
+        fake "users/22656-favorites-by-activity", :url_path => 'users/22656/favorites', :query => { :sort => 'activity' }
+        fake "users/22656-favorites-by-views",    :url_path => 'users/22656/favorites', :query => { :sort => 'views' }
+        fake "users/22656-favorites-by-creation", :url_path => 'users/22656/favorites', :query => { :sort => 'creation' }
+        fake "users/22656-favorites-by-added",    :url_path => 'users/22656/favorites', :query => { :sort => 'added' }
+      end
+      
       it "finds the user's favorite questions" do
         subject.favorites.should_not be_empty
         subject.favorites.first.should be_is_a(Stacked::Question)
       end
 
-      it "can pass options to favorites" do
-        subject.favorites.size.should >= 16
-        subject.favorites(:pagesize => 1).size.should eql(1)
-      end
-
       it "finds the most recent favorites" do
-        subject.favorites(:sort => 'activity', :pagesize => 2).should be_sorted_by(:last_activity_date, :desc)
+        subject.favorites(:sort => 'activity').should be_sorted_by(:last_activity_date, :desc)
       end
 
       it "finds the most viewed favorites" do
-        subject.favorites(:sort => 'views', :pagesize => 2).should be_sorted_by(:view_count, :desc)
+        subject.favorites(:sort => 'views').should be_sorted_by(:view_count, :desc)
       end
 
       it "finds the newest favorites" do
-        subject.favorites(:sort => 'creation', :pagesize => 2).should be_sorted_by(:creation_date, :desc)
+        subject.favorites(:sort => 'creation').should be_sorted_by(:creation_date, :desc)
       end
 
       it "finds the favorites in the order they were made favorite" do
         # How the devil do you test this?
-        subject.favorites(:sort => 'added', :pagesize => 1).first.should be_is_a(Stacked::Question)
+        subject.favorites(:sort => 'added').first.should be_is_a(Stacked::Question)
       end
 
     end
 
     context "questions" do
+      before(:all) do
+        fake "users/22656-questions", :url_path => 'users/22656/questions'
+        fake "users/22656-questions-by-activity", :url_path => 'users/22656/questions', :query => { :sort => 'activity' }
+        fake "users/22656-questions-by-views",    :url_path => 'users/22656/questions', :query => { :sort => 'views' }
+        fake "users/22656-questions-by-creation", :url_path => 'users/22656/questions', :query => { :sort => 'creation' }
+        fake "users/22656-questions-by-votes",    :url_path => 'users/22656/questions', :query => { :sort => 'votes' }
+      end
 
       it "finds the user's questions" do
         question = subject.questions.first
@@ -122,52 +156,56 @@ describe Stacked::User do
         question.owner.user_id.should eql(subject.user_id)
       end
 
-      it "can pass options to questions" do
-        subject.questions.size.should >= 21
-        subject.questions(:pagesize => 1).size.should eql(1)
-      end
-
       it "finds the user's recent questions" do
-        questions = subject.questions(:sort => 'activity', :pagesize => 2)
+        questions = subject.questions(:sort => 'activity')
         questions.should be_sorted_by(:last_activity_date, :desc)
       end
 
       it "finds the user's most viewed questions" do
-        questions = subject.questions(:sort => 'views', :pagesize => 2)
+        questions = subject.questions(:sort => 'views')
         questions.should be_sorted_by(:view_count, :desc)
       end
 
       it "finds the user's newest questions" do
-        questions = subject.questions(:sort => 'creation', :pagesize => 2)
+        questions = subject.questions(:sort => 'creation')
         questions.should be_sorted_by(:creation_date, :desc)
       end
 
       it "finds the user's most popular questions" do
-        questions = subject.questions(:sort => 'votes', :pagesize => 2)
+        questions = subject.questions(:sort => 'votes')
         questions.should be_sorted_by(:score, :desc)
       end
     end
 
     it "reputation changes" do
-      change = subject.rep_changes(:pagesize => 1).first
+      fake "users/22656-reputation", :url_path => 'users/22656/reputation'
+      
+      change = subject.rep_changes.first
       change.should be_is_a(Stacked::RepChange)
     end
 
     it "mentioned / mentions" do
-      # Testing the mentioned method by way of aliases.
-      subject.mentioned(:pagesize => 1).first.should be_is_a(Stacked::Comment)
+      fake "users/22656-mentioned", :url_path => 'users/22656/mentioned'
+      
+      subject.mentioned.first.should be_is_a(Stacked::Comment)
     end
 
     it "timeline" do
-      subject.timeline(:pagesize => 1).first.should be_is_a(Stacked::UserTimeline)
+      fake "users/22656-timeline", :url_path => 'users/22656/timeline'
+      
+      subject.timeline.first.should be_is_a(Stacked::UserTimeline)
     end
 
     it "tags" do
-      subject.tags(:pagesize => 1).first.should be_is_a(Stacked::Tag)
+      fake "users/22656-tags", :url_path => 'users/22656/tags'
+      
+      subject.tags.first.should be_is_a(Stacked::Tag)
     end
 
     it "badges" do
-      subject.badges(:pagesize => 1).first.name.should eql("Teacher")
+      fake "users/22656-badges", :url_path => 'users/22656/badges'
+      
+      subject.badges.first.name.should eql("Teacher")
     end
 
   end

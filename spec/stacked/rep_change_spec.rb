@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Stacked::RepChange do
   before(:all) do
     fake "users/22656"
-    fake "users/22656-reputation", :url_path => 'users/22656/reputation', :query => { :fromdate => 1270132345, :todate => 1270132348 }
+    fake "users/22656-reputation-ranged", :url_path => 'users/22656/reputation', :query => { :fromdate => 1270132345, :todate => 1270132348 }
     fake "answers/2272830" # referenced by subject.post
   end
   
