@@ -20,7 +20,9 @@ def fake(name, options = {})
   else
     path + "index"
   end
+  
+  url_path = options.delete(:url_path) || name
 
-  stub_request(method, base + name + "?" + query).
+  stub_request(method, base + url_path + "?" + query).
     to_return(:body => File.read(file))
 end
