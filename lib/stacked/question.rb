@@ -44,23 +44,33 @@ module Stacked
     
     # Answers for the question.
     def answers(options={})
-      parse_answers(request(singular(question_id) + "/answers", options))
+      @answers = self.class.parse_answers(request(singular(question_id) + "/answers", options))
     end
     
     # Comments for the question.
     def comments(options={})
-      parse_comments(request(singular(question_id) + "/comments", options))
+      @comments ||= self.class.parse_comments(request(singular(question_id) + "/comments", options))
     end
 
     # A timeline of the question.
     def timeline(options={})
-      parse_post_timeline(request(singular(question_id) + "/timeline", options))
+      self.class.parse_post_timeline(request(singular(question_id) + "/timeline", options))
     end
     
     # The Stacked::Answer representing the accepted answer.
     # nil if none accepted
     def accepted_answer
       Answer.find(accepted_answer_id) if accepted_answer_id
+    end
+    
+    # Helper method for creating Stacked::Answer object when initializing new Stacked::Question objects.
+    def answers=(ans)
+      @answers = ans.map { |a| Answer.new(a) }
+    end
+    
+    # Helper method for creating Stacked::Comment object when initializing new Stacked::Question objects.
+    def comments=(coms)
+      @comments = coms.map { |c| Comment.new(c) }
     end
     
     # Helper method for creating Stacked::User object when initializing new Stacked::Question objects.
