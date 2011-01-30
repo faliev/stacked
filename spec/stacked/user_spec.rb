@@ -75,28 +75,32 @@ describe Stacked::User do
 
     context "comments" do
       before(:all) do
-        fake "users/22656-comments", :url_path => 'users/22656/comments'
-        fake "users/22656-comments-by-creation", :url_path => 'users/22656/comments', :query => { :sort => 'creation' }
-        fake "users/22656-comments-by-votes", :url_path => 'users/22656/comments', :query => { :sort => 'votes' }
-        
-        fake "users/22656-comments-mentioning-by-creation", :url_path => 'users/22656/comments/133566', :query => { :sort => 'creation', :fromdate => 1270107600, :todate => 1270107700 }
-        fake "users/22656-comments-mentioning-by-votes",    :url_path => 'users/22656/comments/133566', :query => { :sort => 'votes', :fromdate => 1270107600, :todate => 1270107700 }
+        fake "users/148722"
+        fake "users/148722-comments", :url_path => 'users/148722/comments'
+        fake "users/148722-comments-by-creation", :url_path => 'users/148722/comments', :query => { :sort => 'creation' }
+        fake "users/148722-comments-by-votes", :url_path => 'users/148722/comments', :query => { :sort => 'votes' }
       end
       
+      subject { Stacked::User.find(148722) }
+      
       it "finds some of the user's comments" do
-        pending("Seems to break on Jon Skeet for some reason. See http://api.stackoverflow.com/1.0/users/22656/comments")
         subject.comments.should_not be_empty
         subject.comments.first.should be_is_a(Stacked::Comment)
       end
 
       it "finds the user's recent comments" do
-        pending("Seems to break on Jon Skeet for some reason. See http://api.stackoverflow.com/1.0/users/22656/comments")
         subject.comments(:sort => 'creation').should be_sorted_by(:creation_date, :desc)
       end
 
       it "finds the user's most awesome comments" do
-        pending("Seems to break on Jon Skeet for some reason. See http://api.stackoverflow.com/1.0/users/22656/comments")
         subject.comments(:sort => 'votes').should be_sorted_by(:score, :desc)
+      end
+    end
+    
+    context "comments mentioning" do
+      before(:all) do
+        fake "users/22656-comments-mentioning-by-creation", :url_path => 'users/22656/comments/133566', :query => { :sort => 'creation', :fromdate => 1270107600, :todate => 1270107700 }
+        fake "users/22656-comments-mentioning-by-votes",    :url_path => 'users/22656/comments/133566', :query => { :sort => 'votes', :fromdate => 1270107600, :todate => 1270107700 }
       end
       
       it "finds all comments directed at a user recently" do
