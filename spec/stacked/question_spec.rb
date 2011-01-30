@@ -28,7 +28,7 @@ describe Stacked::Question do
     end
     
     it "search" do
-      pending("Endpoint appears to be broken at the time of testing. Always returning no results.")
+      #pending("Endpoint appears to be broken at the time of testing. Always returning no results.")
       question = subject.search(:intitle => 'ImageMagick').first
       question.title.should =~ /ImageMagick/i
     end
