@@ -1,13 +1,10 @@
 # Stacked - A Ruby wrapper for the Stack Exchange API (v1.0)
 
-# Note: This code is being actively developed and will be merged with master when ready.
-
 While a lot of the core code has remained unchanged, this fork has went through many updates to get it working with the latest version (1.0) of the Stack Exchange API. Many thanks to radar for this initial work on this project.
 
 ## Installation
 
-    # Currently installs outdated version of the gem
-    # sudo gem install stacked
+    sudo gem install stacked
 
 ## Usage
 
@@ -67,4 +64,4 @@ Methods that are designed to take options in the API are designed that way in th
      
 ## Documentation
 
-For additional details, checkout the latest generated [documentation](http://raid5.github.com/stacked).
+For additional details, checkout the latest generated [documentation](http://radar.github.com/stacked).
