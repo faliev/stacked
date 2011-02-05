@@ -1,0 +1,675 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Module: Stacked::Parser</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Stacked.html" title="Stacked (module)">Stacked</a></span></span>
+     &raquo; 
+    <span class="title">Parser</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: Stacked::Parser
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+    <dt class="r1">Included in:</dt>
+    <dd class="r1"><span class='object_link'><a href="Base.html" title="Stacked::Base (class)">Base</a></span></dd>
+    
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/stacked/parser.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parse_answers-instance_method" title="#parse_answers (instance method)">- (Object) <strong>parse_answers</strong>(result) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Convert an answers result into a collection of Stacked::Answer objects.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parse_badges-instance_method" title="#parse_badges (instance method)">- (Object) <strong>parse_badges</strong>(result) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Convert a badges result into a collection of Stacked::Badge objects.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parse_comments-instance_method" title="#parse_comments (instance method)">- (Object) <strong>parse_comments</strong>(result) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Convert a comments result into a collection of Stacked::Comment objects.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parse_post_timeline-instance_method" title="#parse_post_timeline (instance method)">- (Object) <strong>parse_post_timeline</strong>(result) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Convert a post timeline result into a collection of Stacked::PostTimeline
+objects.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parse_questions-instance_method" title="#parse_questions (instance method)">- (Object) <strong>parse_questions</strong>(result) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Convert a questions result into a collection of Stacked::Question objects.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parse_rep_changes-instance_method" title="#parse_rep_changes (instance method)">- (Object) <strong>parse_rep_changes</strong>(result) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Convert a reputation result into a collection of Stacked::Reputation
+objects.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parse_tags-instance_method" title="#parse_tags (instance method)">- (Object) <strong>parse_tags</strong>(result) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Convert a tags result into a collection of Stacked::Tag objects.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parse_type-instance_method" title="#parse_type (instance method)">- (Object) <strong>parse_type</strong>(result, type) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Converts the specified result into objects of the <tt>type</tt> class.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parse_user_timeline-instance_method" title="#parse_user_timeline (instance method)">- (Object) <strong>parse_user_timeline</strong>(result) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Convert a user timeline result into a collection of Stacked::Usertimeline
+objects.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="parse_answers-instance_method">
+  
+    - (<tt>Object</tt>) <strong>parse_answers</strong>(result) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Convert an answers result into a collection of Stacked::Answer objects.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+4
+5
+6</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stacked/parser.rb', line 4</span>
+
+<span class='kw'>def</span> <span class='id parse_answers'>parse_answers</span><span class='lparen'>(</span><span class='id result'>result</span><span class='rparen'>)</span>
+  <span class='id parse_type'>parse_type</span><span class='lparen'>(</span><span class='id result'>result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>answer</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="parse_badges-instance_method">
+  
+    - (<tt>Object</tt>) <strong>parse_badges</strong>(result) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Convert a badges result into a collection of Stacked::Badge objects.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+8
+9
+10</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stacked/parser.rb', line 8</span>
+
+<span class='kw'>def</span> <span class='id parse_badges'>parse_badges</span><span class='lparen'>(</span><span class='id result'>result</span><span class='rparen'>)</span>
+  <span class='id parse_type'>parse_type</span><span class='lparen'>(</span><span class='id result'>result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>badge</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="parse_comments-instance_method">
+  
+    - (<tt>Object</tt>) <strong>parse_comments</strong>(result) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Convert a comments result into a collection of Stacked::Comment objects.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+13
+14
+15</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stacked/parser.rb', line 13</span>
+
+<span class='kw'>def</span> <span class='id parse_comments'>parse_comments</span><span class='lparen'>(</span><span class='id result'>result</span><span class='rparen'>)</span>
+  <span class='id parse_type'>parse_type</span><span class='lparen'>(</span><span class='id result'>result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>comment</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="parse_post_timeline-instance_method">
+  
+    - (<tt>Object</tt>) <strong>parse_post_timeline</strong>(result) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Convert a post timeline result into a collection of Stacked::PostTimeline
+objects.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+18
+19
+20</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stacked/parser.rb', line 18</span>
+
+<span class='kw'>def</span> <span class='id parse_post_timeline'>parse_post_timeline</span><span class='lparen'>(</span><span class='id result'>result</span><span class='rparen'>)</span>
+  <span class='id parse_type'>parse_type</span><span class='lparen'>(</span><span class='id result'>result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>post_timeline</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="parse_questions-instance_method">
+  
+    - (<tt>Object</tt>) <strong>parse_questions</strong>(result) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Convert a questions result into a collection of Stacked::Question objects.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stacked/parser.rb', line 23</span>
+
+<span class='kw'>def</span> <span class='id parse_questions'>parse_questions</span><span class='lparen'>(</span><span class='id result'>result</span><span class='rparen'>)</span>
+  <span class='id parse_type'>parse_type</span><span class='lparen'>(</span><span class='id result'>result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>question</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="parse_rep_changes-instance_method">
+  
+    - (<tt>Object</tt>) <strong>parse_rep_changes</strong>(result) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Convert a reputation result into a collection of Stacked::Reputation
+objects.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stacked/parser.rb', line 28</span>
+
+<span class='kw'>def</span> <span class='id parse_rep_changes'>parse_rep_changes</span><span class='lparen'>(</span><span class='id result'>result</span><span class='rparen'>)</span>
+  <span class='id parse_type'>parse_type</span><span class='lparen'>(</span><span class='id result'>result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rep_change</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="parse_tags-instance_method">
+  
+    - (<tt>Object</tt>) <strong>parse_tags</strong>(result) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Convert a tags result into a collection of Stacked::Tag objects.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33
+34
+35</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stacked/parser.rb', line 33</span>
+
+<span class='kw'>def</span> <span class='id parse_tags'>parse_tags</span><span class='lparen'>(</span><span class='id result'>result</span><span class='rparen'>)</span>
+  <span class='id parse_type'>parse_type</span><span class='lparen'>(</span><span class='id result'>result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tag</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="parse_type-instance_method">
+  
+    - (<tt>Object</tt>) <strong>parse_type</strong>(result, type) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Converts the specified result into objects of the <tt>type</tt> class.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+43
+44
+45</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stacked/parser.rb', line 43</span>
+
+<span class='kw'>def</span> <span class='id parse_type'>parse_type</span><span class='lparen'>(</span><span class='id result'>result</span><span class='comma'>,</span> <span class='id type'>type</span><span class='rparen'>)</span>
+  <span class='id parse'>parse</span><span class='lparen'>(</span><span class='id result'>result</span><span class='lbracket'>[</span><span class='id type'>type</span><span class='period'>.</span><span class='id pluralize'>pluralize</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Stacked::</span><span class='embexpr_beg'>#{</span><span class='id type'>type</span><span class='period'>.</span><span class='id classify'>classify</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id constantize'>constantize</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="parse_user_timeline-instance_method">
+  
+    - (<tt>Object</tt>) <strong>parse_user_timeline</strong>(result) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Convert a user timeline result into a collection of Stacked::Usertimeline
+objects.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stacked/parser.rb', line 38</span>
+
+<span class='kw'>def</span> <span class='id parse_user_timeline'>parse_user_timeline</span><span class='lparen'>(</span><span class='id result'>result</span><span class='rparen'>)</span>
+  <span class='id parse_type'>parse_type</span><span class='lparen'>(</span><span class='id result'>result</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user_timeline</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Fri Feb  4 17:11:38 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.4 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>
